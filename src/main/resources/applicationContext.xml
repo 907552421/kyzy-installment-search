@@ -13,5 +13,5 @@
     <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
     <context:property-placeholder
-        location="classpath:common-config.properties"/>
+        location="classpath:common-config.properties,classpath:es.properties"/>
 </beans>

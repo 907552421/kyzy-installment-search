@@ -1,37 +1,38 @@
 package com.kyzy.kyzyinstallment.search.core.unittest;
 
+import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.dictionary.py.Pinyin;
+import com.kyzy.kyzyinstallment.search.api.facade.SearchFacade;
 import com.kyzy.kyzyinstallment.search.core.constants.SystemConfig;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
+import java.util.List;
+
+import static com.hankcs.hanlp.HanLP.convertToPinyinList;
 
 /**
  * Created by 90755 on 2016/11/14.
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration("classpath:applicationContext.xml")
+
 public class UnitTest {
-//    @Test
-//    public void run() {
-//        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-//        SystemConfig bean = ac.getBean(SystemConfig.class);
-//        System.out.println(bean.getOnline());
-//
-//    }
 
-//    @Resource
-//    private static SystemConfig sys;
+    @Test
+    public void test(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        SearchFacade searchFacade =  context.getBean(SearchFacade.class);
+        searchFacade.suggest("jy",10).stream().forEach(suggest -> System.out.println(suggest));
+    }
 
+    @Test
+    public void testHanLP(){
+        List<Pinyin> pyList =  HanLP.convertToPinyinList("东方宝石");
+        pyList.stream().forEach(pinyin -> {
+            System.out.println(pinyin.getPinyinWithoutTone());
+            System.out.println(pinyin.getFirstChar());
+        });
 
-    public static void main(String[] args) {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-        SystemConfig bean = ac.getBean(SystemConfig.class);
-        System.out.println(bean.getOnline());
     }
 }

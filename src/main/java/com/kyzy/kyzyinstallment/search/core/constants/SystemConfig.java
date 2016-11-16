@@ -16,6 +16,8 @@ public class SystemConfig {
 
     public static final String SEARCH_INDEX_NAME = "mall";
 
+    public static final String SEARCH_TYPE_SKU = "sku";
+
     public static final String SEARCH_TYPE_SUGGEST = "suggestion";
 
     public static final String TOKENIZER_IK_SMART = "ik_smart";
